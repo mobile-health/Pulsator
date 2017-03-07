@@ -18,13 +18,13 @@ open class Pulsator: CAReplicatorLayer, CAAnimationDelegate {
     fileprivate let pulse = CALayer()
     fileprivate var animationGroup: CAAnimationGroup!
     fileprivate var alpha: CGFloat = 0.45
-
-    override open var backgroundColor: CGColor? {
+    
+    open override var borderColor: CGColor? {
         didSet {
-            pulse.backgroundColor = backgroundColor
-            guard let backgroundColor = backgroundColor else {return}
+            pulse.borderColor = borderColor
+            guard let borderColor = borderColor else {return}
             let oldAlpha = alpha
-            alpha = backgroundColor.alpha
+            alpha = borderColor.alpha
             if alpha != oldAlpha {
                 recreate()
             }
@@ -181,7 +181,8 @@ open class Pulsator: CAReplicatorLayer, CAAnimationDelegate {
             origin: CGPoint.zero,
             size: CGSize(width: diameter, height: diameter))
         pulse.cornerRadius = radius
-        pulse.backgroundColor = backgroundColor
+        pulse.borderColor = borderColor
+        pulse.borderWidth = borderWidth
     }
     
     fileprivate func updateInstanceDelay() {
